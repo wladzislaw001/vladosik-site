@@ -126,3 +126,24 @@ body{isolation:isolate}
  @keyframes cat-step{0%{opacity:1}50%,100%{opacity:0}}
 }
 @media(prefers-reduced-motion:reduce){.cat-dock.arrived img{animation:none}}
+
+.cat-feature{position:relative;isolation:isolate}
+.work-backdrop{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.19;background:linear-gradient(90deg,#151015 28%,#15101577 65%,#151015 100%),var(--work-image) right center/auto 100% no-repeat;mask-image:linear-gradient(transparent,#000 19%,#000 76%,transparent)}
+[data-cat=music]{--work-image:url(media/work-music.webp)}
+[data-cat=books]{--work-image:url(media/work-reading.webp)}
+[data-cat=code]{--work-image:url(media/work-code.webp)}
+.cat-sticker{float:right;margin:-.65rem .2rem .5rem 1rem;position:relative;z-index:1;object-fit:cover;border:2px solid #c79053;border-radius:28%;box-shadow:0 6px 16px #0008;transform:rotate(7deg)}
+.cat-feature.cat-active .dance-sticker{animation:sticker-dance .55s ease-in-out 5}
+.cat-feature.cat-active .read-sticker{animation:sticker-read 1.45s ease-in-out 2}
+@keyframes sticker-dance{0%,100%{transform:rotate(7deg)}40%{transform:translateY(-9px) rotate(-10deg)}}
+@keyframes sticker-read{50%{transform:rotate(-4deg) translateY(3px)}}
+.support-portrait{display:block;width:clamp(100px,15vw,152px);height:auto;border-radius:50%;border:2px solid #c79053;margin:1rem 0 .75rem;object-fit:cover}
+.cat-active .support-portrait{animation:sticker-read .8s ease-out 2}
+.receipt{background:radial-gradient(ellipse at top left,#fff2cf,transparent 70%),linear-gradient(135deg,#f1d49f,#e8bb7f);border-inline:1px solid #c59760}
+.receipt dl{margin-block:1.35rem}
+.receipt dl div{border-top:1px dashed #8e6d4c;padding:.8rem 0}
+.receipt dt{border:0;padding:0;font:700 1.15rem/1.2 Georgia,serif}
+.receipt dd{margin:.32rem 0 0;color:#543620}
+.receipt .cat-stamp{margin:0;color:#684326}
+@media(max-width:690px){.cat-sticker{width:58px;height:58px}.work-backdrop{opacity:.13}}
+@media(prefers-reduced-motion:reduce){.cat-feature .cat-sticker,.cat-feature .support-portrait{animation:none!important}}

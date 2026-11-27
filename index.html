@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Три книги V.V.V, музыка S-94 и честная смета кота-финдиректора.">
 <title>Бабосики для Владосика · V.V.V</title>
-<link rel="stylesheet" href="style.css?v=4">
-<script src="site.js?v=4" defer></script>
+<link rel="stylesheet" href="style.css?v=5">
+<script src="site.js?v=5" defer></script>
 </head>
 <body>
 <div class="ambient" aria-hidden="true"><span>S-94</span></div>
@@ -24,12 +24,14 @@
 <section class="hero">
 <div class="intro">
 <h1><span data-en="Bucks for">Бабосики для</span> <em data-en="Vladosik">Владосика</em></h1>
-<p data-en="I write books and record music as S-94. The cat paints the covers, works on Cockroach Races, and develops apps. He also runs the finances. A spectacular hiring decision.">Я пишу книги и записываю музыку как S-94. Кот рисует обложки, делает «Тараканьи бега» и разрабатывает приложения. Финансы тоже на нём. Кадровое решение века.</p>
+<p data-en="I’m Vladosik. I tell the truth as I see it and write from the heart. My books and S-94 tracks are here for you. The cat paints the covers, builds apps, and works on Cockroach Races. His latest feature request? A bigger milk bowl.">Я Владосик. Говорю правду, как я её вижу, и пишу от чистого сердца. Здесь мои книги и музыка S-94. Кот рисует обложки, пишет приложения и делает «Тараканьи бега». Последняя правка от финдиректора — миску для молока побольше.</p>
 <div class="actions"><a class="button primary" href="#books" data-en="Get the books">Скачать книги</a><a class="button" href="#music" data-en="Listen to S-94">Слушать S-94</a></div>
 </div>
 <figure><img class="cat" src="media/fin-director.webp" alt="Чёрный кот в золотых очках и цепи" data-alt-en="Black cat in gold sunglasses and a chain" fetchpriority="high"><figcaption data-en="Cover artist and Chief Financial Cat">Художник обложек и кот-финдиректор</figcaption></figure>
 </section>
-<section id="music" class="section">
+<section id="music" class="section cat-feature" data-cat="music">
+<div class="work-backdrop" aria-hidden="true"></div>
+<img class="cat-sticker dance-sticker" src="media/cat-dance.webp" alt="" loading="lazy" width="80" height="80">
 <div class="section-title"><h2 data-en="Music">Музыка</h2><span class="wordmark">S-94</span></div>
 <div class="music-grid">
 <article class="lead">
@@ -43,7 +45,9 @@
 <div class="actions"><a class="button" href="https://open.spotify.com/artist/5DAtpVsHCNoIqowCxkjUkh">Spotify</a><a class="button" href="https://music.yandex.ru/artist/26474471" data-en="Yandex Music">Яндекс Музыка</a></div>
 </div></div>
 </section>
-<section id="books" class="section">
+<section id="books" class="section cat-feature" data-cat="books">
+<div class="work-backdrop" aria-hidden="true"></div>
+<img class="cat-sticker read-sticker" src="media/work-reading.webp" alt="" loading="lazy" width="80" height="80">
 <div class="section-title"><h2 data-en="Books">Книги</h2></div>
 <p data-en="All three EPUBs are free to download. The books are in Russian.">Все три EPUB можно скачать бесплатно. Книги на русском.</p>
 <div class="books">
@@ -64,7 +68,8 @@
 </article>
 </div>
 </section>
-<section id="cat-stage" class="section stage">
+<section id="cat-stage" class="section stage cat-feature" data-cat="code">
+<div class="work-backdrop" aria-hidden="true"></div>
 <div>
 <h2 data-en="The CFO after hours">Финдиректор после работы</h2>
 <button class="button" type="button" id="play-cat">Включить сцену с котом</button>
@@ -73,12 +78,14 @@
 </div>
 <div class="scene"><img id="stage-image" src="media/cat-throne.webp" width="512" height="512" loading="lazy" alt=""></div>
 </section>
-<section id="support" class="section support">
+<section id="support" class="section support cat-feature" data-cat="support">
 <div class="receipt">
 <h2 data-en="The cat’s budget">Смета кота</h2>
-<dl><dt data-en="Keep the CFO employed">На содержание финдиректора</dt><dd data-en="He audits the budget by sitting on it.">Проверяет бюджет, сидя на нём.</dd>
-<dt data-en="Milk allowance">На молоко</dt><dd data-en="He insisted it get its own line.">Кот настоял на отдельной строке.</dd>
-<dt data-en="Company plane">Служебный самолёт</dt><dd data-en="Folded from this receipt.">Складывается из этого чека.</dd></dl><p class="cat-stamp" data-en="Approved by the cat">Одобрено котом</p>
+<dl>
+<div><dt data-en="The CFO’s salary">Жалованье финдиректора</dt><dd data-en="For painting covers and supervising the keyboard.">За обложки и круглосуточный надзор за клавиатурой.</dd></div>
+<div><dt data-en="Milk allowance">Молочный резерв</dt><dd data-en="One bowl. The CFO has already audited it twice.">Одна миска. Финансовый директор проверил её лично. Дважды.</dd></div>
+<div><dt data-en="The company jet">Служебный самолёт</dt><dd data-en="Still folded from this receipt. Test flight pending.">Пока бумажный. Испытательный полёт — с края стола.</dd></div>
+</dl><p class="cat-stamp" data-en="Approved by the cat">Одобрено котом</p>
 </div>
 <div>
 <div class="cat-dock">
@@ -86,6 +93,7 @@
 <img src="media/guide-point.webp" alt="" width="144" height="126" loading="lazy">
 </div>
 <p data-en="The books and music are free. If you’d like to treat the CFO to some milk, you can support the project.">Книги и музыка бесплатны. Если хочется угостить финдиректора молоком, можно поддержать проект.</p>
+<img class="support-portrait" src="media/work-support.webp" alt="" loading="lazy" width="152" height="152">
 <a class="button primary" href="https://revolut.me/uladzislauv94" data-en="Support via Revolut">Поддержать через Revolut</a>
 <p class="support-status" data-en="Support is optional.">Поддержка добровольная.</p>
 </div>

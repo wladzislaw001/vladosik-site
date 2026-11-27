@@ -116,3 +116,12 @@ window.addEventListener('scroll', queueGuidePosition, {passive: true});
 window.addEventListener('resize', queueGuidePosition);
 guideLayout.addEventListener('change', queueGuidePosition);
 queueGuidePosition();
+
+const catSections = new IntersectionObserver(entries => {
+  for (const entry of entries) {
+    entry.target.classList.toggle('cat-active', entry.isIntersecting);
+  }
+}, {rootMargin: '0px 0px -22% 0px'});
+for (const section of document.querySelectorAll('.cat-feature')) {
+  catSections.observe(section);
+}
