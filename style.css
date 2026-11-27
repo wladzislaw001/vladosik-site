@@ -110,3 +110,19 @@ body{isolation:isolate}
 .support-status{color:var(--gold)}
 @media(max-width:690px){.stage{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.scene img{animation:none!important}}
+
+.cat-guide{display:none}
+.cat-dock{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.cat-dock img{width:clamp(76px,11vw,144px);height:auto;object-fit:contain;flex:none}
+.cat-dock.arrived img{animation:cat-point .7s ease-out}
+@keyframes cat-point{35%{transform:translate(-7px,4px) rotate(-5deg)}}
+@media(min-width:1340px) and (prefers-reduced-motion:no-preference){
+ .cat-guide{display:block;position:fixed;right:.35rem;top:0;width:min(8vw,125px);aspect-ratio:1;z-index:1;pointer-events:none;opacity:0;transform:translateY(var(--guide-y,18vh));transition:transform .25s ease-out,opacity .25s}
+ .cat-guide.visible{opacity:1}
+ .cat-guide img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+ .cat-guide img+img{opacity:0}
+ .cat-guide.walking img:first-child{animation:cat-step .42s steps(1,end) infinite}
+ .cat-guide.walking img+img{animation:cat-step .42s steps(1,end) infinite reverse}
+ @keyframes cat-step{0%{opacity:1}50%,100%{opacity:0}}
+}
+@media(prefers-reduced-motion:reduce){.cat-dock.arrived img{animation:none}}

@@ -82,3 +82,37 @@ document.addEventListener('visibilitychange', () => {
   if (document.hidden && sceneTimer) stopScene();
 });
 renderSceneText();
+
+const guide = document.querySelector('.cat-guide');
+const dock = document.querySelector('.cat-dock');
+const guideLayout = matchMedia('(min-width: 1340px) and (prefers-reduced-motion: no-preference)');
+let dockVisible = false;
+let guideFrame = 0;
+let stepTimer;
+
+function positionGuide() {
+  guideFrame = 0;
+  const distance = document.documentElement.scrollHeight - innerHeight;
+  const progress = distance > 0 ? Math.min(1, Math.max(0, scrollY / distance)) : 0;
+  const visible = guideLayout.matches && !dockVisible && scrollY > 60;
+  guide.classList.toggle('visible', visible);
+  if (!visible) return;
+  guide.style.setProperty('--guide-y', (18 + progress * 57) + 'vh');
+  guide.classList.add('walking');
+  clearTimeout(stepTimer);
+  stepTimer = setTimeout(() => guide.classList.remove('walking'), 480);
+}
+
+function queueGuidePosition() {
+  if (!guideFrame) guideFrame = requestAnimationFrame(positionGuide);
+}
+
+new IntersectionObserver(([entry]) => {
+  dockVisible = entry.isIntersecting;
+  dock.classList.toggle('arrived', dockVisible);
+  queueGuidePosition();
+}).observe(dock);
+window.addEventListener('scroll', queueGuidePosition, {passive: true});
+window.addEventListener('resize', queueGuidePosition);
+guideLayout.addEventListener('change', queueGuidePosition);
+queueGuidePosition();
