@@ -90,3 +90,23 @@ figcaption{position:absolute;z-index:1;right:1rem;bottom:1.4rem;padding:.35rem .
  .lead{padding-right:0}
  nav{gap:1rem}
 }
+
+body{isolation:isolate}
+.ambient{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:radial-gradient(ellipse at 95% 45%,#24334754,transparent 42%),radial-gradient(ellipse at 0% 90%,#7b3b1328,transparent 43%)}
+.ambient span{position:absolute;right:-.08em;top:35%;color:#c69c6e;font:900 clamp(8rem,29vw,30rem)/1 system-ui,sans-serif;letter-spacing:-.1em;opacity:.065}
+.stage{display:grid;grid-template-columns:1fr 1.15fr;align-items:center;gap:clamp(1rem,5vw,4rem)}
+.stage h2{margin-bottom:1.3rem}
+.scene{overflow:hidden;aspect-ratio:1.45;background:#21151a;border-radius:.8rem;border:1px solid var(--line)}
+.scene img{width:100%;height:100%;object-fit:cover;object-position:center 44%;display:block}
+.scene img[data-action=walk]{animation:patrol 2.7s ease-in-out both}
+.scene img[data-action=dance]{animation:dance .66s ease-in-out 4}
+.scene img[data-action=milk]{animation:sip 1.2s ease-in-out 2}
+.scene img[data-action=throne]{animation:reign 2.7s ease-out both}
+@keyframes patrol{from{transform:scale(1.16) translateX(-5%)}to{transform:scale(1.16) translateX(5%)}}
+@keyframes dance{0%,100%{transform:scale(1.13) rotate(-2deg)}50%{transform:scale(1.19) rotate(2deg) translateY(-2%)}}
+@keyframes sip{0%,100%{transform:scale(1.04)}50%{transform:scale(1.16) translateY(2%)}}
+@keyframes reign{from{transform:scale(1.12)}to{transform:scale(1)}}
+.receipt .cat-stamp{font-family:Georgia,serif;font-style:italic;color:#684326;text-align:right}
+.support-status{color:var(--gold)}
+@media(max-width:690px){.stage{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.scene img{animation:none!important}}

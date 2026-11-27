@@ -4,7 +4,6 @@ const translations = [...document.querySelectorAll('[data-en]')].map(element => 
 }));
 const image = document.querySelector('[data-alt-en]');
 const russianAlt = image.alt;
-const copyStatus = document.querySelector('#copy-status');
 
 languageButton.addEventListener('click', () => {
   const english = document.documentElement.lang === 'ru';
@@ -13,25 +12,9 @@ languageButton.addEventListener('click', () => {
   languageButton.lang = english ? 'ru' : 'en';
   languageButton.textContent = english ? 'RU' : 'EN';
   image.alt = english ? image.dataset.altEn : russianAlt;
-  copyStatus.textContent = '';
+  renderSceneText();
   for (const {element, russian, english: translation} of translations) {
     element.textContent = english ? translation : russian;
-  }
-});
-
-document.querySelector('#copy').addEventListener('click', async () => {
-  const iban = document.querySelector('#iban');
-  const english = document.documentElement.lang === 'en';
-  try {
-    await navigator.clipboard.writeText(iban.textContent.replaceAll(' ', ''));
-    copyStatus.textContent = english ? 'IBAN copied.' : 'IBAN скопирован.';
-  } catch {
-    const range = document.createRange();
-    range.selectNodeContents(iban);
-    const selection = window.getSelection();
-    selection.removeAllRanges();
-    selection.addRange(range);
-    copyStatus.textContent = english ? 'IBAN selected. Copy it manually.' : 'IBAN выделен. Скопируй его вручную.';
   }
 });
 
@@ -43,3 +26,59 @@ for (const player of localPlayers) {
     }
   });
 }
+
+const sceneImage = document.querySelector('#stage-image');
+const sceneCaption = document.querySelector('#stage-caption');
+const sceneButton = document.querySelector('#play-cat');
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const scenes = [
+  ['walk', 'Обход владений', 'Inspecting the kingdom'],
+  ['dance', 'Танцы после отчёта', 'Dancing after the audit'],
+  ['milk', 'Молочный перерыв', 'Milk break'],
+  ['throne', 'На троне', 'On the throne']
+];
+let sceneIndex = 3;
+let sceneTimer;
+
+function renderSceneText() {
+  const english = document.documentElement.lang === 'en';
+  sceneCaption.textContent = scenes[sceneIndex][english ? 2 : 1];
+  sceneButton.textContent = reducedMotion.matches
+    ? (english ? 'Next scene' : 'Следующая сцена')
+    : sceneTimer
+      ? (english ? 'Stop scene' : 'Остановить сцену')
+      : (english ? 'Play the cat’s scene' : 'Включить сцену с котом');
+}
+
+function showScene(index) {
+  sceneIndex = index;
+  const [name] = scenes[index];
+  sceneImage.src = 'media/cat-' + name + '.webp';
+  sceneImage.dataset.action = sceneTimer ? name : '';
+  renderSceneText();
+}
+
+function stopScene() {
+  clearTimeout(sceneTimer);
+  sceneTimer = undefined;
+  showScene(sceneIndex);
+}
+
+function playScene(index) {
+  sceneTimer = setTimeout(() => {
+    if (index + 1 < scenes.length) playScene(index + 1);
+    else stopScene();
+  }, 2700);
+  showScene(index);
+}
+
+sceneButton.addEventListener('click', () => {
+  if (sceneTimer) stopScene();
+  else if (reducedMotion.matches) showScene((sceneIndex + 1) % scenes.length);
+  else playScene(0);
+});
+reducedMotion.addEventListener('change', stopScene);
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden && sceneTimer) stopScene();
+});
+renderSceneText();
